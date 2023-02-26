@@ -1,10 +1,7 @@
 """
     Chris Kollbaum 2/8/2023
 
-    This code will take simulated real-time data sending temperature readings
-    for a smoker and two foods in the smoker to rabbitmq where these readings
-    will be processes and monitored by three consumers, where these will
-    monitor and alert if a significant temperature change has occurred.
+    
     
 
 """
