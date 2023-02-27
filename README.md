@@ -14,3 +14,5 @@ This code captures data from a file and sends it to the game queue.
 ![game](Gameemitter.png)
 
 ## RabbitMQ Admin Site and Game Queue
+
+![Queue](Queue.png)
