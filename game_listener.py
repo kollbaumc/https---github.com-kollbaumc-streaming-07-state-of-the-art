@@ -13,7 +13,7 @@ import sys
 from collections import deque
 
 game_deque = deque(maxlen = 5)
-alert = "Alert! Alert! Smoker temperature is decreasing at a high rate! Temp has gone down by more than 15 degrees in 2.5 minutes"
+alert = "Alert! This game is close to a blowout"
 
 
 # define a callback function to be called when a message is received
