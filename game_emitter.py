@@ -50,7 +50,7 @@ def send_score(host: str, queue_name: str, message: str):
         Time, Play, Indiana, Iowa = data_row
 
         # sleep for a few seconds
-        time.sleep(1)
+        time.sleep(3)
 
         try:
             # create a blocking connection to the RabbitMQ server
@@ -64,6 +64,8 @@ def send_score(host: str, queue_name: str, message: str):
             ch.queue_declare(queue=queue_name, durable=True)
 
             try:
+                Indiana = int(Indiana)
+                Iowa = int(Iowa)
                 # use an fstring to create a message from our data
                 # notice the f before the opening quote for our string?
                 game_data = f"{Time}, {Play}, {Indiana}, {Iowa}"
