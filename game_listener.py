@@ -30,8 +30,9 @@ def game_callback(ch, method, properties, body):
     #creating the alert
     if len(game_deque) == 1:
         gamealert = Indiana - Iowa
-        if gamealert >= 10:
+        if gamealert > 10:
             print(alert)
+        
     # decode the binary message body to a string
     print(f" [x] Received Game update the score and plays are {game_message}")
     # when done with task, tell the user
