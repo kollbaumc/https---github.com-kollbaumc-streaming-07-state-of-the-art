@@ -8,4 +8,4 @@ This project is streaming the progress of the Iowa-Indiana Basketball Game.  It 
 
 This code captures data from a file and sends it to the game queue.
 
-![game_emitter](Gameeitter.png)
+![game](Gameemitter.png)
