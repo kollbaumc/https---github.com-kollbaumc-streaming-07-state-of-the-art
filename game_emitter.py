@@ -2,7 +2,6 @@
     Chris Kollbaum 2/25/2023
 
     
-    
 
 """
 
@@ -29,9 +28,7 @@ def send_score(host: str, queue_name: str, message: str):
 
     Parameters:
         host (str): the host name or IP address of the RabbitMQ server
-        queue_name (str): the name of the queue recieving data for the smoker temperature
-        queue_name1 (str): the name of the queue recieving data for food A
-        queue_name2 (str): the name of the queue recieving data for food B
+        queue_name (str): the name of the queue recieving data for the game updates
         message (str): the message to be sent to the queue
     """
     host = "localhost"
@@ -50,7 +47,7 @@ def send_score(host: str, queue_name: str, message: str):
 
     for data_row in reader:
         # read a row from the file
-        Time, Play, Indiana , Iowa = data_row
+        Time, Play, Indiana, Iowa = data_row
 
         # sleep for a few seconds
         time.sleep(1)
@@ -65,19 +62,18 @@ def send_score(host: str, queue_name: str, message: str):
             # and help ensure messages are processed in order
             # messages will not be deleted until the consumer acknowledges
             ch.queue_declare(queue=queue_name, durable=True)
-        
 
             try:
                 # use an fstring to create a message from our data
                 # notice the f before the opening quote for our string?
-                Score = f"{Time}, {Play}, {Indiana}, {Iowa}"
+                game_data = f"{Time}, {Play}, {Indiana}, {Iowa}"
                 # prepare a binary (1s and 0s) message to stream
-                MESSAGE = Score.encode()
+                MESSAGE = game_data.encode()
                 # use the socket sendto() method to send the message
                 sock.sendto(MESSAGE, address_tuple)
                 ch.basic_publish(exchange="", routing_key=queue_name, body=MESSAGE)
                 # print a message to the console for the user
-                print(f" [x] Sent Score {MESSAGE}")
+                print(f" [x] Sent Game Update {MESSAGE}")
             except ValueError:
                 pass
 

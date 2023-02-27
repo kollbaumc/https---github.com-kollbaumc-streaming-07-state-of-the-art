@@ -1,5 +1,8 @@
 """
-    
+    This is the listener for the game updates.  We will send an alert if 
+    the game is getting out of hand and could become a blowout.  It will
+    also send an alert if the game is getting close and you want to drop
+    what you are doing and tune in.  
 
     Chris Kollbaum 2/25/23
 
@@ -11,6 +14,7 @@ from collections import deque
 
 game_deque = deque(maxlen = 5)
 alert = "Alert! This game is close to a blowout"
+alert2 = "Alert! The game is getting close.  You may want to watch."
 
 
 # define a callback function to be called when a message is received
@@ -19,18 +23,17 @@ def game_callback(ch, method, properties, body):
     #splitting the smoker data to isolate temp
     game_message =  body.decode().split(",")
     # creating a temp variable
-    game = [0]
-    #changing the temp string to a float
-    game[0] = (game_message[1])
+    Indiana = game_message[2]
+    Iowa = game_message[3]
     #placing the temp data in the right side of the deque
-    game_deque.append(temp[0])
+    game_deque.append([0])
     #creating the alert
     if len(game_deque) == 5:
-        gamealert = 
-        if gamealert > 15:
+        gamealert = Indiana - Iowa
+        if gamealert > 10:
             print(alert)
     # decode the binary message body to a string
-    print(f" [x] Received the temp.  Smoker temp is {game_message}")
+    print(f" [x] Received Game update the score and plays are {game_message}")
     # when done with task, tell the user
     # acknowledge the message was received and processed 
     # (now it can be deleted from the queue)
@@ -79,7 +82,7 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
         # configure the channel to listen on a specific queue,  
         # use the callback function named callback,
         # and do not auto-acknowledge the message (let the callback handle it)
-        channel.basic_consume( queue=qn, auto_ack=False, on_message_callback=smoker_callback)
+        channel.basic_consume( queue=qn, auto_ack=False, on_message_callback=game_callback)
 
         # print a message to the console for the user
         print(" [*] Ready for work. To exit press CTRL+C")
