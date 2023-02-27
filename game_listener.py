@@ -12,7 +12,7 @@ import pika
 import sys
 from collections import deque
 
-game_deque = deque(maxlen = 5)
+game_deque = deque(maxlen = 1)
 alert = "Alert! This game is close to a blowout"
 alert2 = "Alert! The game is getting close.  You may want to watch."
 
@@ -22,15 +22,15 @@ def game_callback(ch, method, properties, body):
     """ Define behavior on getting a message."""
     #splitting the smoker data to isolate temp
     game_message =  body.decode().split(",")
-    # creating a temp variable
-    Indiana = game_message[2]
-    Iowa = game_message[3]
+    # creating variables
+    Indiana = int(game_message[2])
+    Iowa = int(game_message[3])
     #placing the temp data in the right side of the deque
     game_deque.append([0])
     #creating the alert
-    if len(game_deque) == 5:
+    if len(game_deque) == 1:
         gamealert = Indiana - Iowa
-        if gamealert > 10:
+        if gamealert >= 10:
             print(alert)
     # decode the binary message body to a string
     print(f" [x] Received Game update the score and plays are {game_message}")
