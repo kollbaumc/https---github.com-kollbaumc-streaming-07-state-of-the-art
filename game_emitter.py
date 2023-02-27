@@ -1,6 +1,9 @@
 """
     Chris Kollbaum 2/25/2023
 
+    This code will take data from the iowa game csv file and send it to a queue called 
+    "Game" where it will wait to be received by a listener.  
+
     
 
 """
@@ -38,7 +41,7 @@ def send_score(host: str, queue_name: str, message: str):
     # use the socket constructor to create a socket object we'll call sock
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 
-    # read from a file to get some fake data
+    # read from a file to get some old data archived at espn.com
     input_file = open("iowagame.csv", "r")
 
     # create a csv reader for our comma delimited data
@@ -50,7 +53,7 @@ def send_score(host: str, queue_name: str, message: str):
         Time, Play, Indiana, Iowa = data_row
 
         # sleep for a few seconds
-        time.sleep(3)
+        time.sleep(5)
 
         try:
             # create a blocking connection to the RabbitMQ server
@@ -64,6 +67,7 @@ def send_score(host: str, queue_name: str, message: str):
             ch.queue_declare(queue=queue_name, durable=True)
 
             try:
+                # changing the score for each team from strings to integers
                 Indiana = int(Indiana)
                 Iowa = int(Iowa)
                 # use an fstring to create a message from our data
