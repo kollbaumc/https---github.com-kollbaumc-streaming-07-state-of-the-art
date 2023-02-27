@@ -1,1 +1,1 @@
-# kollbaumc-streaming-07-state-of-the-art
+# streaming-07-state-of-the-art
