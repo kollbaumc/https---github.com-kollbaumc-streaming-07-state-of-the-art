@@ -1,8 +1,5 @@
 """
-    This program will listen and consume messages from the bbq emitter
-    for the temperature of the smoker every 30 seconds. It will also send 
-    an alert if in a 2.5 minute period the smoker goes down by more than 
-    15 degrees in temperature. 
+    
 
     Chris Kollbaum 2/25/23
 
