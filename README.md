@@ -22,6 +22,8 @@ This code captures data from a file and sends it to the game queue.
 
 ## Game Consumer
 
+I decided to just make one game consumer.  The data goes together.  It, to me, doesn't make much sense to split up the data as we did with the smart smoker project where it did make sense.  Here, the time, play, and score are really interrelated.  
+
 This is a screenshot of the emitter and consumer.  Notice that the first alert has been triggered of the game potentially
 becoming a blowout.
 
