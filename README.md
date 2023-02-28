@@ -16,3 +16,15 @@ This code captures data from a file and sends it to the game queue.
 ## RabbitMQ Admin Site and Game Queue
 
 ![Queue](Queue.png)
+
+## Game Consumer
+
+This is a screenshot of the emitter and consumer.  Notice that the first alert has been triggered of the game potentially
+becoming a blowout.
+
+![consumer](alert.png)
+
+This is another screenshot of the emitter and consumer.  Notice that the second alert has been triggered of the game getting 
+really close and if we are not watching, we should start paying attention.  
+
+![consumer2](alert2.png)

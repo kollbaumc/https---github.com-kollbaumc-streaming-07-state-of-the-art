@@ -13,28 +13,29 @@ import sys
 from collections import deque
 
 game_deque = deque(maxlen = 1)
-alert = "Alert! This game is close to a blowout"
+alert = "Alert! This game is becoming a blowout"
 alert2 = "Alert! The game is getting close.  You may want to watch."
 
 
 # define a callback function to be called when a message is received
 def game_callback(ch, method, properties, body):
     """ Define behavior on getting a message."""
-    #splitting the smoker data to isolate temp
+    #splitting the game data to isolate temp
     game_message =  body.decode().split(",")
     # creating variables
     Indiana = int(game_message[2])
     Iowa = int(game_message[3])
-    #placing the temp data in the right side of the deque
+    #placing the game data in the right side of the deque
     game_deque.append([0])
     #creating the alert
     if len(game_deque) == 1:
-        gamealert = Indiana - Iowa
+        gamealert = abs(Indiana - Iowa)
         if gamealert > 10:
             print(alert)
-        
-    # decode the binary message body to a string
-    print(f" [x] Received Game update the score and plays are {game_message}")
+        elif gamealert <=2:
+            print(alert2)
+        # decode the binary message body to a string
+    print(f" [x] Received Game update.  The play and score are {game_message}")
     # when done with task, tell the user
     # acknowledge the message was received and processed 
     # (now it can be deleted from the queue)

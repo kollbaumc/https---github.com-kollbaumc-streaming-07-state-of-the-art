@@ -26,7 +26,7 @@ def offer_rabbitmq_admin_site():
 
 def send_score(host: str, queue_name: str, message: str):
     """
-    Creates and sends a message to 3 queues each execution.
+    Creates and sends a message to a queue each execution.
     This process runs and finishes.
 
     Parameters:
