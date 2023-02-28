@@ -1,4 +1,4 @@
-# streaming-07-state-of-the-art
+# Streaming-07-state-of-the-art
 
 ## Streaming Game Data
 ## Chris Kollbaum 2/25/2023
